@@ -1,18 +1,49 @@
+<% if (page.category) { %>
+<h1>分类: <%= page.category.name %></h1>
+<% } %>
 
-<div id="category">
-  <h1><%=page.category%></h1>
-  <% page.posts.each(article => { %>
-    <div class="category-item">
-      <a href="<%=url_for(article.path)%>">
-        <%=article.title%>
-      </a>
-      <time datetime="<%=date_xml(article.date)%>">
-        <%=date(article.date)%>
-      </time>
-    </div>
-  <% }); %>
-</div>
+<% if (page.posts.length > 0) { %>
+  <div class="category-posts">
+    <% page.posts.sort('date', -1).each(function(post) { %>
+      <div class="category-post-item">
+        <h2><a href="<%= url_for(post.path) %>"><%= post.title %></a></h2>
+        <div class="post-meta">
+          <time datetime="<%= post.date.toJSON() %>">
+            <%= date(post.date) %>
+          </time>
+          | 阅读时间: <%= Math.ceil(post.content.length / 400) %> 分钟
+        </div>
+      </div>
+    <% }); %>
+  </div>
+<% } %>
 
-<div id="paginator">
-  <%-paginator()%>
-</div>
+<style>
+.category-posts {
+  margin-top: 20px;
+}
+
+.category-post-item {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.category-post-item:last-child {
+  border-bottom: none;
+}
+
+.category-post-item h2 {
+  margin: 0 0 10px 0;
+}
+
+.category-post-item h2 a {
+  text-decoration: none;
+  color: #0066cc;
+}
+
+.category-post-item .post-meta {
+  color: #666;
+  font-size: 0.9em;
+}
+</style>

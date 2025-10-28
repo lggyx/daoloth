@@ -1,70 +1,57 @@
+<% if (page.posts.length > 0) { %>
+<h1>文章归档</h1>
 
-<%
-const categoriesList = list_categories({ show_count: false });
-const tagsList = list_tags({ show_count: false });
-const archivesList = list_archives({ show_count: false });
-%>
-
-<% if (is_year() === false) { %>
-  <div id="archive">
-
-    <h1>Archives</h1>
-
-    <% if (theme.atom !== undefined) { %>
-      <p>
-        The feed is available via
-        <a href="<%=theme.atom%>">atom</a>.
-      </p>
-      <br>
+<% var year = 0; %>
+<% page.posts.sort('date', -1).each(function(post) { %>
+  <% var postYear = post.date.format('YYYY'); %>
+  <% if (year !== postYear) { %>
+    <% if (year !== 0) { %>
+      </ul>
     <% } %>
+    <% year = postYear; %>
+    <h2 class="archive-year"><%= year %></h2>
+    <ul class="archive-list">
+  <% } %>
+  <li class="archive-item">
+    <time datetime="<%= post.date.toJSON() %>"><%= post.date.format('MM-DD') %></time>
+    <a href="<%= url_for(post.path) %>"><%= post.title %></a>
+  </li>
+<% }); %>
+</ul>
 
-    <aside>
-      <h2>Categories</h2>
-      <% if (categoriesList !== "") { %>
-        <%-categoriesList%>
-      <% } else { %>
-        <p>None.</p>
-      <% } %>
-    </aside>
-    <br>
+<style>
+.archive-year {
+  margin: 30px 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
 
-    <aside>
-      <h2>Tags</h2>
-      <% if (tagsList !== "") { %>
-        <%-tagsList%>
-      <% } else { %>
-        <p>None.</p>
-      <% } %>
-    </aside>
-    <br>
+.archive-list {
+  list-style: none;
+  padding-left: 0;
+}
 
-    <aside>
-      <h2>Archives</h2>
-      <% if (archivesList !== "") { %>
-        <%-archivesList%>
-      <% } else { %>
-        <p>None.</p>
-      <% } %>
-    </aside>
+.archive-item {
+  padding: 10px 0;
+  border-bottom: 1px dashed #eee;
+  display: flex;
+}
 
-  </div>
-<% } else { %>
+.archive-item time {
+  color: #666;
+  min-width: 60px;
+  margin-right: 20px;
+}
 
-  <h1><%=page.month + '/' + page.year%></h1>
+.archive-item a {
+  color: #0066cc;
+  text-decoration: none;
+  flex-grow: 1;
+}
 
-  <% page.posts.each(article => { %>
-    <div class="archive-item">
-      <a href="<%=url_for(article.path)%>">
-        <%=article.title%>
-      </a>
-      <time datetime="<%=date_xml(article.date)%>">
-        <%=date(article.date)%>
-      </time>
-    </div>
-  <% }) %>
-
-  <div id="paginator">
-    <%-paginator()%>
-  </div>
-
+.archive-item a:hover {
+  text-decoration: underline;
+}
+</style>
 <% } %>

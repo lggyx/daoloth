@@ -1,18 +1,49 @@
+<% if (page.tag) { %>
+<h1>标签: <%= page.tag.name %></h1>
+<% } %>
 
-<div id="tag">
-  <h1><%=page.tag%></h1>
-  <% page.posts.each(article => { %>
-    <div class="tag-item">
-      <a href="<%=url_for(article.path)%>">
-        <%=article.title%>
-      </a>
-      <time datetime="<%=date_xml(article.date)%>">
-        <%=date(article.date)%>
-      </time>
-    </div>
-  <% }) %>
-</div>
+<% if (page.posts.length > 0) { %>
+  <div class="tag-posts">
+    <% page.posts.sort('date', -1).each(function(post) { %>
+      <div class="tag-post-item">
+        <h2><a href="<%= url_for(post.path) %>"><%= post.title %></a></h2>
+        <div class="post-meta">
+          <time datetime="<%= post.date.toJSON() %>">
+            <%= date(post.date) %>
+          </time>
+          | 阅读时间: <%= Math.ceil(post.content.length / 400) %> 分钟
+        </div>
+      </div>
+    <% }); %>
+  </div>
+<% } %>
 
-<div id="paginator">
-  <%-paginator()%>
-</div>
+<style>
+.tag-posts {
+  margin-top: 20px;
+}
+
+.tag-post-item {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.tag-post-item:last-child {
+  border-bottom: none;
+}
+
+.tag-post-item h2 {
+  margin: 0 0 10px 0;
+}
+
+.tag-post-item h2 a {
+  text-decoration: none;
+  color: #0066cc;
+}
+
+.tag-post-item .post-meta {
+  color: #666;
+  font-size: 0.9em;
+}
+</style>

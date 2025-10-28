@@ -1,0 +1,440 @@
+/* 基础重置样式 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* 暗黑模式样式 */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.dark-mode #menu-outer {
+  background-color: #2d2d2d;
+  box-shadow: 0 2px 4px rgba(0,0,0,.3);
+}
+
+.dark-mode #menu-inner a {
+  color: #f0f0f0;
+}
+
+.dark-mode #bottom-outer {
+  background-color: #2d2d2d;
+  color: #f0f0f0;
+}
+
+.dark-mode #bottom-inner a {
+  color: #4da6ff;
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 15px 20px;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 滚动进度条 */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  z-index: 1000;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: #0066cc;
+  width: 0%;
+}
+
+/* 容器布局 */
+#menu-outer {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#menu-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#menu-inner a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+#menu-inner a:hover {
+  color: #0066cc;
+}
+
+#content-outer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 140px);
+}
+
+#bottom-outer {
+  background-color: #f5f5f5;
+  padding: 20px 0;
+  margin-top: 40px;
+  transition: background-color 0.3s;
+}
+
+#bottom-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+/* 回到顶部按钮 */
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  z-index: 99;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.dark-mode #back-to-top {
+  background-color: #4da6ff;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  #menu-inner {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  #content-outer {
+    padding: 10px;
+  }
+  
+  #menu-inner a {
+    padding: 10px 10px;
+    font-size: 0.9em;
+  }
+  
+  .theme-toggle {
+    padding: 10px 10px;
+    font-size: 1em;
+  }
+  
+  /* 代码块在小屏幕上的样式 */
+  .post-content pre, .page-content pre {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+  
+  .code-copy-btn {
+    top: 5px;
+    right: 5px;
+    padding: 2px;
+  }
+}
+
+/* 文章列表样式 */
+.recent-post-item {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  transition: border-color 0.3s;
+}
+
+.dark-mode .recent-post-item {
+  border-bottom: 1px solid #444;
+}
+
+.recent-post-item:last-child {
+  border-bottom: none;
+}
+
+.recent-post-item a {
+  text-decoration: none;
+  color: #0066cc;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.dark-mode .recent-post-item a {
+  color: #4da6ff;
+}
+
+.recent-post-item time {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.dark-mode .recent-post-item time {
+  color: #aaa;
+}
+
+/* 分页样式 */
+.pagination {
+  margin-top: 30px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 0 5px;
+  text-decoration: none;
+  background-color: #0066cc;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.dark-mode .pagination a {
+  background-color: #4da6ff;
+  color: #000;
+}
+
+.pagination a:hover {
+  background-color: #0052a3;
+}
+
+.dark-mode .pagination a:hover {
+  background-color: #1a8cff;
+}
+
+.page-number {
+  margin: 0 15px;
+  color: #666;
+}
+
+.dark-mode .page-number {
+  color: #aaa;
+}
+
+/* 归档页面样式 */
+.archive-year {
+  margin: 30px 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.dark-mode .archive-year {
+  border-bottom: 1px solid #444;
+  color: #f0f0f0;
+}
+
+.archive-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.archive-item {
+  padding: 10px 0;
+  border-bottom: 1px dashed #eee;
+  display: flex;
+}
+
+.dark-mode .archive-item {
+  border-bottom: 1px dashed #444;
+}
+
+.archive-item time {
+  color: #666;
+  min-width: 60px;
+  margin-right: 20px;
+}
+
+.dark-mode .archive-item time {
+  color: #aaa;
+}
+
+.archive-item a {
+  color: #0066cc;
+  text-decoration: none;
+  flex-grow: 1;
+}
+
+.dark-mode .archive-item a {
+  color: #4da6ff;
+}
+
+.archive-item a:hover {
+  text-decoration: underline;
+}
+
+/* 页面和文章样式 */
+.post, .page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.post-header, .page-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.dark-mode .post-header, .dark-mode .page-header {
+  border-bottom: 1px solid #444;
+}
+
+.post-header h1, .page-header h1 {
+  margin-top: 0;
+  font-size: 2em;
+}
+
+.post-meta {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.dark-mode .post-meta {
+  color: #aaa;
+}
+
+.post-meta a, .page-content a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.dark-mode .post-meta a, .dark-mode .page-content a {
+  color: #4da6ff;
+}
+
+.post-meta a:hover, .page-content a:hover {
+  text-decoration: underline;
+}
+
+.post-content, .page-content {
+  font-size: 1.1em;
+  line-height: 1.8;
+}
+
+/* 代码块样式 */
+.post-content pre, .page-content pre {
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  padding: 15px;
+  overflow-x: auto;
+  transition: background-color 0.3s;
+  position: relative;
+  
+  /* 增加最大宽度以适应小屏幕 */
+  max-width: 100%;
+}
+
+.dark-mode .post-content pre, .dark-mode .page-content pre {
+  background-color: #2d2d2d;
+}
+
+.post-content code, .page-content code {
+  font-family: 'Courier New', monospace;
+  background-color: #f8f8f8;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.dark-mode .post-content code, .dark-mode .page-content code {
+  background-color: #2d2d2d;
+}
+
+.post-content pre code, .page-content pre code {
+  background: none;
+  padding: 0;
+}
+
+/* 代码复制按钮 */
+.code-copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, background-color 0.2s;
+  z-index: 10;
+}
+
+.dark-mode .code-copy-btn {
+  background-color: rgba(45, 45, 45, 0.8);
+  border: 1px solid #555;
+}
+
+pre:hover .code-copy-btn {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  background-color: rgba(240, 240, 240, 0.8);
+}
+
+.dark-mode .code-copy-btn:hover {
+  background-color: rgba(60, 60, 60, 0.8);
+}
+
+.code-copy-btn.success {
+  color: #28a745;
+}
+
+/* 页面加载进度条 */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #29d;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
